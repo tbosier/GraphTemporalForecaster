@@ -16,7 +16,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.meta_causal_model import GraphTemporalForecaster
-from training.trainer import MetaCausalTrainer, build_sequences
+from training.trainer import GraphTemporalTrainer, build_sequences
 
 # Import comparison models
 try:
@@ -146,7 +146,7 @@ def train_graph_forecaster(X_train, Y_train, X_val, Y_val):
         embed_dim=8
     )
     
-    trainer = MetaCausalTrainer(model, lr=1e-3, batch_size=32)
+    trainer = GraphTemporalTrainer(model, lr=1e-3, batch_size=32)
     trainer.train_loader = torch.utils.data.DataLoader(
         torch.utils.data.TensorDataset(X_train, Y_train), 
         batch_size=32, shuffle=True

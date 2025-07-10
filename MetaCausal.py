@@ -108,7 +108,7 @@ class GNNCell(nn.Module):
         x_next = self.update(msgs, x)
         return x_next
 
-class MetaCausalForecaster(nn.Module):
+class GraphTemporalForecaster(nn.Module):
     def __init__(self, input_dim=1, hidden_dim=64, seq_len=30, embed_dim=8):
         super().__init__()
         self.embedding = nn.Linear(input_dim, embed_dim)
@@ -158,7 +158,7 @@ train_ds = TensorDataset(X, Y)
 train_loader = DataLoader(train_ds, batch_size=B, shuffle=True)
 
 # ---- Model ----
-model = MetaCausalForecaster(input_dim=1, hidden_dim=64, seq_len=30, embed_dim=8).to(device)
+model = GraphTemporalForecaster(input_dim=1, hidden_dim=64, seq_len=30, embed_dim=8).to(device)
 
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 loss_fn = nn.MSELoss()
@@ -192,8 +192,8 @@ plt.plot(np.arange(80), y[:80], label='Train', color='black')
 plt.plot(test_idx, y[80:], label='Test', color='blue')
 plt.plot(test_idx, arima_forecast, label='ARIMA', linestyle='--', color='red')
 plt.plot(test_idx, lgb_forecast, label='LightGBM', linestyle='--', color='green')
-plt.plot(test_idx, preds, label='MetaCausalForecaster', linestyle='--', color='purple')
-plt.title("Forecast Comparison: ARIMA, LightGBM, MCF")
+plt.plot(test_idx, preds, label='GraphTemporalForecaster', linestyle='--', color='purple')
+plt.title("Forecast Comparison: ARIMA, LightGBM, GraphTemporalForecaster")
 plt.xlabel("Time")
 plt.ylabel("Value")
 plt.grid(True)

@@ -10,7 +10,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.meta_causal_model import GraphTemporalForecaster
-from training.trainer import MetaCausalTrainer, build_sequences
+from training.trainer import GraphTemporalTrainer, build_sequences
 
 def generate_simple_trend(n=500):
     """Generate a simple time series with trend and noise."""
@@ -51,7 +51,7 @@ def main():
         embed_dim=8
     )
     
-    trainer = MetaCausalTrainer(model, lr=1e-3, batch_size=16)
+    trainer = GraphTemporalTrainer(model, lr=1e-3, batch_size=16)
     
     # Prepare data loaders
     import torch

@@ -16,7 +16,7 @@ def build_sequences(y, seq_len, forecast_horizon=1):
     Y = torch.tensor(np.stack(Y), dtype=torch.float32)
     return X, Y
 
-class MetaCausalTrainer:
+class GraphTemporalTrainer:
     def __init__(self, model, device='auto', lr=1e-3, batch_size=32):
         self.device = device if device != 'auto' else ('cuda' if torch.cuda.is_available() else 'cpu')
         self.model = model.to(self.device)

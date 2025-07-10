@@ -26,7 +26,7 @@ pip install -e .
 
 ```python
 from models.meta_causal_model import GraphTemporalForecaster
-from training.trainer import MetaCausalTrainer, build_sequences
+from training.trainer import GraphTemporalTrainer, build_sequences
 import numpy as np
 
 # Generate sample data
@@ -43,7 +43,7 @@ model = GraphTemporalForecaster(
     embed_dim=8
 )
 
-trainer = MetaCausalTrainer(model, lr=1e-3, batch_size=32)
+trainer = GraphTemporalTrainer(model, lr=1e-3, batch_size=32)
 # ... train the model
 
 # Make predictions

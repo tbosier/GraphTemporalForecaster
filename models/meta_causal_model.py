@@ -64,7 +64,4 @@ class GraphTemporalForecaster(nn.Module):
         adj = adj * (1 - torch.eye(adj.shape[1], device=adj.device).unsqueeze(0))  # Remove self-loop
         x_next = self.gnn_cell(x_last, adj)
         y_pred = self.decoder(x_next)
-        return y_pred.squeeze(1), adj
-
-# Keep old name for backward compatibility
-MetaCausalForecaster = GraphTemporalForecaster 
+        return y_pred.squeeze(1), adj 
